@@ -1,13 +1,25 @@
 
+SECTION .text
+    global _ft_isalpha
 
-
-global _ft_isalpha
-
-section .text
 
 _ft_isalpha:
-    ; if cmp ==
-    ; or cmp ==
-    ; return 1
-    ; return null
-    ; char in parameter
+
+init:
+    push rbp
+    mov  rbp,   rsp
+    mov rax, 1
+
+do_test:
+    cmp rdi, 'A'   ; < 'A'
+    jb set_not
+    cmp rdi, 'z'  ; > 'z'
+    ja set_not
+    jmp out
+
+set_not:
+    mov rax, 0
+
+out:
+    leave
+    ret
