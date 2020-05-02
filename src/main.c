@@ -13,6 +13,7 @@ int ft_toupper(int c);
 int ft_tolower(int c);
 int ft_puts(const char *s);
 size_t ft_strlen(const char *s);
+void *ft_memset(void *b, int c, size_t len);
 
 void test_ft_bzero()
 {
@@ -266,6 +267,23 @@ void test_ft_strlen(void)
 		printf("cor : %zu  result: %zu\n", correction, ret);
 }
 
+void test_ft_memset(void)
+{
+	char mem[100] = { "abc" };
+	char *ret;
+	char *result;
+
+	result = "abc";
+	ret = ft_memset(mem, 'c', 0);
+	if (0 != memcmp(ret, result, ft_strlen(result)))
+		printf("ft_memset error");
+
+	result = "ccccccc";
+	ret = ft_memset(mem, 'c', 7);
+	if (0 != memcmp(ret, result, ft_strlen(result)))
+		printf("ft_memset error");
+}
+
 int main(void)
 {
 	test_ft_bzero();
@@ -279,5 +297,6 @@ int main(void)
 	test_tolower();
 	//	test_puts();
 	test_ft_strlen();
+	test_ft_memset();
 	return 0;
 }
