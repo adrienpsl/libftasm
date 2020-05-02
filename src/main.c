@@ -12,6 +12,7 @@ int ft_isprint(int c);
 int ft_toupper(int c);
 int ft_tolower(int c);
 int ft_puts(const char *s);
+size_t ft_strlen(const char *s);
 
 void test_ft_bzero()
 {
@@ -240,6 +241,31 @@ void test_puts(void)
 		printf("puts test 1");
 }
 
+void test_ft_strlen(void)
+{
+	size_t ret;
+	size_t correction;
+	char *str;
+
+	str = "";
+	ret = ft_strlen(str);
+	correction = strlen(str);
+	if (ret != correction)
+		printf("cor : %zu  result: %zu\n", correction, ret);
+
+	str = "asnoetuhaosenhutaosentuhasonetuhnsaoethuaonesthu    aoesuthaosuhnV";
+	ret = ft_strlen(str);
+	correction = strlen(str);
+	if (ret != correction)
+		printf("cor : %zu  result: %zu\n", correction, ret);
+
+	str = "o";
+	ret = ft_strlen(str);
+	correction = strlen(str);
+	if (ret != correction)
+		printf("cor : %zu  result: %zu\n", correction, ret);
+}
+
 int main(void)
 {
 	test_ft_bzero();
@@ -251,6 +277,7 @@ int main(void)
 	test_isprint();
 	test_toupper();
 	test_tolower();
-	test_puts();
+	//	test_puts();
+	test_ft_strlen();
 	return 0;
 }
