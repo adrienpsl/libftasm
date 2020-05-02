@@ -223,6 +223,23 @@ void test_tolower(void)
 		printf("ft_tolower test 4\n");
 }
 
+void test_puts(void)
+{
+	int ret;
+
+	ret = ft_puts("222222222222:123:12");
+	if (ret <= 0)
+		printf("puts test 1");
+
+	ret = ft_puts("");
+	if (ret <= 0)
+		printf("puts test 1");
+
+	ret = ft_puts(0);
+	if (ret <= 0)
+		printf("puts test 1");
+}
+
 int main(void)
 {
 	test_ft_bzero();
@@ -234,5 +251,6 @@ int main(void)
 	test_isprint();
 	test_toupper();
 	test_tolower();
+	test_puts();
 	return 0;
 }
