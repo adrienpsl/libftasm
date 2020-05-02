@@ -6,6 +6,7 @@ void ft_bzero(void *start, size_t n);
 char *ft_strcat(char *s1, char *s2);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
+int ft_isascii(int c);
 
 void test_ft_bzero()
 {
@@ -93,11 +94,29 @@ void test_isdigit(void)
 		printf("ft_isdigit test 3\n");
 }
 
+void test_isascii(void)
+{
+	int result;
+
+	result = ft_isascii(0);
+	if (!result)
+		printf("ft_isascii test 1\n");
+
+	result = ft_isascii(127);
+	if (!result)
+		printf("ft_isascii test 2\n");
+
+	result = ft_isascii(128);
+	if (result)
+		printf("ft_isascii test 3\n");
+}
+
 int main()
 {
 	test_ft_bzero();
 	test_ft_strcat();
 	test_isalpha();
 	test_isdigit();
+	test_isascii();
 	return 0;
 }
