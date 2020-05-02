@@ -8,6 +8,10 @@ int ft_isalpha(int c);
 int ft_isdigit(int c);
 int ft_isascii(int c);
 int ft_isalnum(int c);
+int ft_isprint(int c);
+int ft_toupper(int c);
+int ft_tolower(int c);
+int ft_puts(const char *s);
 
 void test_ft_bzero()
 {
@@ -153,10 +157,73 @@ void test_isalnum(void)
 	result = ft_isalnum('_');
 	if (result)
 		printf("ft_isalnum test 7\n");
-
 }
 
-int main()
+void test_isprint(void)
+{
+	int result;
+
+	// alpha part
+	result = ft_isprint(40);
+	if (!result)
+		printf("ft_isprint test 1\n");
+
+	result = ft_isprint(176);
+	if (!result)
+		printf("ft_isprint test 2\n");
+
+	result = ft_isprint(-1);
+	if (result)
+		printf("ft_isprint test 2\n");
+}
+
+void test_toupper(void)
+{
+	int result;
+
+	result = ft_toupper('a');
+	if ('A' != result)
+		printf("ft_toupper test 1\n");
+
+	result = ft_toupper('z');
+	if ('Z' != result)
+		printf("ft_toupper test 2\n");
+
+	result = ft_toupper('A');
+	if ('A' != result)
+		printf("ft_toupper test 3\n");
+
+	result = ft_toupper('-');
+	if ('-' != result)
+		printf("ft_toupper test 4\n");
+}
+
+void test_tolower(void)
+{
+	int result;
+
+	result = ft_tolower('a');
+	if ('a' != result)
+		printf("ft_tolower test 1\n");
+
+	result = ft_tolower('z');
+	if ('z' != result)
+		printf("ft_tolower test 2\n");
+
+	result = ft_tolower('A');
+	if ('a' != result)
+		printf("ft_tolower test 3\n");
+
+	result = ft_tolower('Z');
+	if ('z' != result)
+		printf("ft_tolower test 3\n");
+
+	result = ft_tolower('-');
+	if ('-' != result)
+		printf("ft_tolower test 4\n");
+}
+
+int main(void)
 {
 	test_ft_bzero();
 	test_ft_strcat();
@@ -164,5 +231,8 @@ int main()
 	test_isdigit();
 	test_isascii();
 	test_isalnum();
+	test_isprint();
+	test_toupper();
+	test_tolower();
 	return 0;
 }
