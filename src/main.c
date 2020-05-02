@@ -5,6 +5,7 @@
 void ft_bzero(void *start, size_t n);
 char *ft_strcat(char *s1, char *s2);
 int ft_isalpha(int c);
+int ft_isdigit(int c);
 
 void test_ft_bzero()
 {
@@ -54,7 +55,7 @@ void test_ft_strcat()
 		printf("ft_strcat test 4");
 }
 
-void test_isalpha()
+void test_isalpha(void)
 {
 	int result;
 
@@ -75,10 +76,28 @@ void test_isalpha()
 		printf("ft_isalpha test 3\n");
 }
 
+void test_isdigit(void)
+{
+	int result;
+
+	result = ft_isdigit('0');
+	if (!result)
+		printf("ft_isdigit test 1\n");
+
+	result = ft_isdigit('9');
+	if (!result)
+		printf("ft_isdigit test 2\n");
+
+	result = ft_isdigit('z');
+	if (result)
+		printf("ft_isdigit test 3\n");
+}
+
 int main()
 {
 	test_ft_bzero();
 	test_ft_strcat();
 	test_isalpha();
+	test_isdigit();
 	return 0;
 }
