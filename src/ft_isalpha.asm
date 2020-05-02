@@ -10,8 +10,15 @@ init:
     mov  rbp,   rsp
     mov rax, 1
 
-do_test:
+is_upper:
     cmp rdi, 'A'   ; < 'A'
+    jb is_lower
+    cmp rdi, 'Z'  ; > 'z'
+    ja is_lower
+    jmp out
+
+is_lower:
+    cmp rdi, 'a'   ; < 'A'
     jb set_not
     cmp rdi, 'z'  ; > 'z'
     ja set_not

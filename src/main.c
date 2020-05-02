@@ -7,6 +7,7 @@ char *ft_strcat(char *s1, char *s2);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
 int ft_isascii(int c);
+int ft_isalnum(int c);
 
 void test_ft_bzero()
 {
@@ -72,9 +73,13 @@ void test_isalpha(void)
 	if (!result)
 		printf("ft_isalpha test 3\n");
 
+	result = ft_isalpha('_');
+	if (result)
+		printf("ft_isalpha test 4\n");
+
 	result = ft_isalpha('1');
 	if (result)
-		printf("ft_isalpha test 3\n");
+		printf("ft_isalpha test 5\n");
 }
 
 void test_isdigit(void)
@@ -92,6 +97,10 @@ void test_isdigit(void)
 	result = ft_isdigit('z');
 	if (result)
 		printf("ft_isdigit test 3\n");
+
+	result = ft_isdigit('_');
+	if (result)
+		printf("ft_isdigit test 4\n");
 }
 
 void test_isascii(void)
@@ -111,6 +120,42 @@ void test_isascii(void)
 		printf("ft_isascii test 3\n");
 }
 
+void test_isalnum(void)
+{
+	int result;
+
+	// alpha part
+	result = ft_isalnum('a');
+	if (!result)
+		printf("ft_isalnum test 1\n");
+
+	result = ft_isalnum('A');
+	if (!result)
+		printf("ft_isalnum test 2\n");
+
+	result = ft_isalnum('z');
+	if (!result)
+		printf("ft_isalnum test 3\n");
+
+	result = ft_isalnum('1');
+	if (!result)
+		printf("ft_isalnum test 4\n");
+
+	// num part
+	result = ft_isalnum('0');
+	if (!result)
+		printf("ft_isalnum test 5\n");
+
+	result = ft_isalnum('9');
+	if (!result)
+		printf("ft_isalnum test 6\n");
+
+	result = ft_isalnum('_');
+	if (result)
+		printf("ft_isalnum test 7\n");
+
+}
+
 int main()
 {
 	test_ft_bzero();
@@ -118,5 +163,6 @@ int main()
 	test_isalpha();
 	test_isdigit();
 	test_isascii();
+	test_isalnum();
 	return 0;
 }
