@@ -2,10 +2,10 @@
 %define s1      rdi
 %define s2      rsi
 %define start   r8
-%define y       r9
+%define tmp     r9b
 
 SECTION .text
-    global _ft_bzero
+    global _ft_strcat
 
 
 _ft_strcat:
@@ -17,20 +17,22 @@ init:
     mov  start,    s1;
 
 get_end_s1:
-    test s1, 0
-    jz copy_into
+    cmp byte [s1], 0x0
+    je copy_into
     inc s1
     jmp get_end_s1
 
 copy_into:
-    test s2, 0
+    cmp byte[s2], 0x0
     jz end
-    mov byte [s1], byte [s2]
+    mov tmp, [s2]
+    mov byte [s1], tmp
     inc s1
     inc s2
     jmp copy_into
 
 end:
+    mov byte[s1], 0
     mov rax, start
     leave
     ret
