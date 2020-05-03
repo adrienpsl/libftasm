@@ -1,4 +1,8 @@
 
+%define buffer_ptr rdx
+%define max_size_line r8
+%define line_counter r9
+
 section .text
     global _main
     global start
@@ -7,42 +11,41 @@ start:
     call _main
     ret
 
-goOut:
-    leave
-    ret
-
 _main:
     push rbp
     mov rbp,    rsp
-    mov rdx,    output      ; hold address of next byte to write
-    mov r8,     1           ; initial length
-    mov r9,     0           ; number of starts written on line so far
+
+    mov buffer_ptr,    output      ; hold address of next byte to write
+    mov max_size_line,     1           ; initial length
+    mov line_counter,     0           ; number of starts written on line so far
+    ; line_counte  = 0
 
 line:
-    mov byte [rdx], '*'     ; write single star
-    inc rdx                 ; advance ptr to next cell to write
-    inc r9                  ; line counter
-    cmp r9,     r8          ; did we reach the max start for that line
+    mov byte [buffer_ptr], '*'     ; write single star
+    inc buffer_ptr               ; advance ptr to next cell to write
+    inc line_counter                  ; line counter
+    cmp line_counter,   max_size_line          ; did we reach the max start for that line
     jne line                ; if not, go to line
 
 lineDone:
-    mov byte [rdx], 10      ; write new line
-    inc rdx                 ; move ptr start new line
-    inc r8                  ; next line will be one char longer
-    mov r9, 0               ; reset current line counter
-    cmp r8, maxLines        ; is the last line ?
+    mov byte [buffer_ptr], 10      ; write new line \n
+    inc buffer_ptr                 ; move ptr start new line
+    inc max_size_line              ; next line will be one char longer
+    mov line_counter, 0             ; reset current line counter
+    cmp max_size_line , maxLines        ; is the last line ?
     jng line                ; if not, write new line.
 
 done:
     mov rax,     0x2000004  ; write
-    mov rdi,     1          ;std
-    mov rsi,        output  ; address of the string to output
-    mov rdx,        dataSize; number of byte to write
+    mov rdi,     STDIN          ;std
+    mov rsi,     output  ; address of the string to output
+    mov rdx,     dataSize; number of byte to write
     syscall                 ; ... syscall
-    call goOut
+    leave
+    ret
 
 
 section .bss
-maxLines     equ 8
-dataSize    equ 44
+maxLines     equ 10
+dataSize    equ  100
 output:     resb dataSize

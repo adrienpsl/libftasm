@@ -5,6 +5,12 @@ rdx
 rcx
 r8, r9
 
+1
+int open(fileName, rigth)
+
+int write(int fd, void *ptr, size_t size);
+          rdi,    rsi        rdx
+
 # return
 rax
 
