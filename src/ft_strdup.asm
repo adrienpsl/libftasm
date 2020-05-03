@@ -1,8 +1,11 @@
+
+; pretty
 %define MACH_SYSCALL(nb) 0x02000000 | nb
 
-%define memory_size [rsp + 0x8*1]
-%define origin [rsp + 0x8*2]
-%define memory [rsp + 0x8*3]
+; my stack values
+%define size [rbp - 0x8]
+%define origin [rbp - 0x8*2]
+%define memory [rbp - 0x8*3]
 
 [BITS 64]
 
@@ -15,35 +18,24 @@ SECTION .text
 
 _ft_strdup:
     push rbp
-    mov  rbp,   rsp
+    mov  rbp        , rsp
 
-    sub  rsp, (0x10 * 2)             ; start, size, malloc return
-    mov qword origin, rdi              ; start string
+    sub  rsp        , 0x8*4   ; 3 value + padding // align on 16bits
+    mov  origin     , rdi     ; save start string
 
     call _ft_strlen
-    add rax, 1         ; \0
-    push Qword rax
-;    push Qword rax
+    mov  size       , rax     ; save string size
+    add  qword size , 1       ; add \0
 
-;    pop Qword rdi
-    sub rsp, 8
-    mov rdi, rax
+    mov  rdi        , size    ; malloc size
     call _malloc
-    cmp rax, 0          ; if fail
-    je _out
-    add rsp, 16
-    mov memory, rax     ; put in memory malloc
+    mov  memory     , rax     ; save memory ptr
 
-    mov rdi, memory     ; set up
-    mov rsi, origin
-    mov rdx, 1000
-    call _ft_memcpy     ; set the good return
+    mov  rdi        , memory  ; set up argument for memcpy
+    mov  rsi        , origin
+    mov  rdx        , size
+    call _ft_memcpy           ; memcpy return is the same.
 
 _out:
     leave
     ret
-
-   ; compter le nombre de char
-   ; malloc
-   ; copy
-   ; return

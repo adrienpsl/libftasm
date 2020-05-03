@@ -306,21 +306,36 @@ void test_ft_memcpy(void)
 #define mega 10000000
 void test_ft_strdup(void)
 {
-	void *ret;
 	char *result;
-	size_t res;
+	char *test;
 
-	char *test = malloc(mega);
-	for (int i = 0; i < mega; ++i)
-		test[i] = 'c';
+	// test 1
+	{
+		test = malloc(mega);
+		for (int i = 0; i < mega; ++i)
+			test[i] = 'c';
 
-	result = ft_strdup(test);
-//	for (int i = 0; i < mega; ++i)
-//		result[i] = 'c';
+		result = ft_strdup(test);
+		for (int i = 0; i < mega; ++i)
+			result[i] = 'c';
+		if (0 != memcmp(test, result, mega))
+			printf("error ft_strdup \n");
+		free(test);
 
-		printf("%s \n",result);
-	//	printf("%zu \n", (size_t)result);
+		for (int i = 0; i < mega; ++i)
+			result[i] = 'o';
+	}
+
+	// test 2
+	{
+		test = strdup("");
+		result = ft_strdup("");
+		if (0 != memcmp(test, result, 1))
+			printf("error ft_strdup 2\n");
+	}
+
 }
+
 
 int main(void)
 {

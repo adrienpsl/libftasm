@@ -19,7 +19,8 @@ SRCS = 	ft_bzero.asm \
 		ft_strlen.asm \
 		ft_tolower.asm \
 		ft_toupper.asm \
-		ft_strcat.asm
+		ft_strcat.asm \
+		test.asm
 #		ft_cat.asm \
 
 OBJS = $(addprefix $(OBJSDIR),$(SRCS:.asm=.o))
