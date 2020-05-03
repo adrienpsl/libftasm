@@ -36,6 +36,7 @@ _ft_strdup:
     mov rdi, size
     call _ft_memcpy     ; set the good return
 
+_out:
     leave
     ret
 

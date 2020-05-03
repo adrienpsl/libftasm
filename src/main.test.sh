@@ -24,3 +24,4 @@ ft_memcpy.o ft_strdup.o \
 
 rm *.o
 ./hell
+
