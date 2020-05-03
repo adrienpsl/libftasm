@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <zconf.h>
 #include "strings.h"
+# include "stdlib.h"
 
 void ft_bzero(void *start, size_t n);
 char *ft_strcat(char *s1, char *s2);
@@ -303,14 +303,23 @@ void test_ft_memcpy(void)
 		printf("ft_memcpy error");
 }
 
+#define mega 10000000
 void test_ft_strdup(void)
 {
 	void *ret;
 	char *result;
 	size_t res;
 
-	res = (size_t)ft_strdup("test");
-//	printf("%zu \n", res);
+	char *test = malloc(mega);
+	for (int i = 0; i < mega; ++i)
+		test[i] = 'c';
+
+	result = ft_strdup(test);
+//	for (int i = 0; i < mega; ++i)
+//		result[i] = 'c';
+
+		printf("%s \n",result);
+	//	printf("%zu \n", (size_t)result);
 }
 
 int main(void)
