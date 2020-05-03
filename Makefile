@@ -18,9 +18,9 @@ SRCS = 	ft_bzero.asm \
 		ft_strdup.asm \
 		ft_strlen.asm \
 		ft_tolower.asm \
-		ft_toupper.asm
+		ft_toupper.asm \
+		ft_strcat.asm
 #		ft_cat.asm \
-		ft_strcat.asm \
 
 OBJS = $(addprefix $(OBJSDIR),$(SRCS:.asm=.o))
 
@@ -36,6 +36,7 @@ $(NAME): $(OBJS)
 
 test: $(NAME)
 	gcc -o $(T_NAME) src/main.c  -I includes/ -L./ -lfts
+	./$(T_NAME)
 
 clean:
 	rm -rf $(OBJSDIR)

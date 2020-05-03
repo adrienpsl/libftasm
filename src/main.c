@@ -305,12 +305,12 @@ void test_ft_memcpy(void)
 
 void test_ft_strdup(void)
 {
-//	void *ret;
-//	char *result;
+	void *ret;
+	char *result;
 	size_t res;
 
 	res = (size_t)ft_strdup("test");
-	printf("%zu \n", res);
+//	printf("%zu \n", res);
 }
 
 int main(void)
