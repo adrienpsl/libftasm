@@ -14,6 +14,8 @@ int ft_tolower(int c);
 int ft_puts(const char *s);
 size_t ft_strlen(const char *s);
 void *ft_memset(void *b, int c, size_t len);
+void *ft_memcpy(void *dest, void *start, size_t len);
+void *ft_strdup(char *str);
 
 void test_ft_bzero()
 {
@@ -284,6 +286,33 @@ void test_ft_memset(void)
 		printf("ft_memset error");
 }
 
+void test_ft_memcpy(void)
+{
+	void *ret;
+	char *result;
+	char buffer[100] = {};
+
+	result = "";
+	ret = ft_memcpy(buffer, result, strlen(result));
+	if (0 != memcmp(ret, result, ft_strlen(result)))
+		printf("ft_memcpy error");
+
+	result = "123\00012";
+	ret = ft_memcpy(buffer, result, strlen(result) + 2);
+	if (0 != memcmp(ret, result, ft_strlen(result) + 2))
+		printf("ft_memcpy error");
+}
+
+void test_ft_strdup(void)
+{
+//	void *ret;
+//	char *result;
+	size_t res;
+
+	res = (size_t)ft_strdup("test");
+	printf("%zu \n", res);
+}
+
 int main(void)
 {
 	test_ft_bzero();
@@ -298,5 +327,7 @@ int main(void)
 	//	test_puts();
 	test_ft_strlen();
 	test_ft_memset();
+	test_ft_memcpy();
+	test_ft_strdup();
 	return 0;
 }
