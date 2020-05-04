@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <fcntl.h>
+#include <zconf.h>
 #include "strings.h"
 # include "stdlib.h"
 
@@ -335,22 +336,45 @@ void test_ft_strdup(void)
 			printf("error ft_strdup 2\n");
 	}
 }
-int ft_cat( int fd);
+int ft_cat(int fd);
 
 void test_ft_cat(void)
 {
-	int fd = open(__FILE__, O_RDONLY);
+	char cmd[128];
+	int i;
+	int fd;
+	int mine;
+	int stdout;
+	char *files[] = {
+		"Makefile",
+		"/bin/ls",
+		"/dev/null",
+		"/usr/bin/python",
+		"/usr/bin/IOAccelMemory",
+		NULL
+	};
 
-	int ret = ft_cat(fd);
-	printf("%d \n", ret);
-
-	ret = ft_cat(-1);
-	printf("%d \n", ret);
-
-	ret = ft_cat(0);
-	printf("%d \n", ret);
-
-
+	stdout = dup(1);
+	i = 0;
+	while (files[i])
+	{
+		fd = open(files[i], O_RDONLY);
+		mine = open("mine", O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		dup2(mine, 1);
+		ft_cat(fd);
+		close(fd);
+		close(mine);
+		dup2(stdout, 1);
+		bzero(cmd, 128);
+		strcat(cmd, "diff ");
+		strcat(cmd, files[i]);
+		strcat(cmd, " mine >> diff_file");
+		if (system(cmd) != 0)
+			printf("error \n");;
+		i++;
+	}
+	ft_cat(-1);
+	ft_cat(0);
 }
 
 int main(void)
