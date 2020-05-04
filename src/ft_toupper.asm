@@ -13,12 +13,11 @@ _ft_toupper:
 
     ; test
     cmp rdi, 'a'   ; <
-    jb out
+    jb  out
     cmp rdi, 'z'  ; >
-    ja out
+    ja  out
 
-    ; update
-    sub rax, 32
+    sub rax, 32  ; a -> A
 
 out:
     leave

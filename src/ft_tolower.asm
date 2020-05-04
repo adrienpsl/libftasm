@@ -2,23 +2,19 @@
 SECTION .text
     global _ft_tolower
 
-
 _ft_tolower:
     ; init
     push rbp
     mov  rbp,   rsp
 
-    ; set
     mov rax, rdi
 
-    ; test
     cmp rdi, 'A'   ; <
-    jb out
+    jb  out
     cmp rdi, 'Z'  ; >
-    ja out
+    ja  out
 
-    ; update
-    add rax, 32
+    add rax, 32   ; A -> a
 
 out:
     leave
