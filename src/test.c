@@ -38,6 +38,7 @@ void test_ft_bzero()
 }
 
 # define size 100
+
 void test_ft_strcat()
 {
 	char s1[size] = {};
@@ -47,24 +48,23 @@ void test_ft_strcat()
 	// empty s1
 	ret = ft_strcat(s1, "1234");
 	if (memcmp(ret, "1234", strlen("1234")) != 0)
-		printf("ft_strcat test 1\n");
+		printf("ft_strcat test 1 %s, %s\n", ret, "1234");
 
-	// empty s2
+	//	 empty s2
 	ret = ft_strcat(s1, "");
 	if (memcmp(ret, "1234", strlen("1234")) != 0)
-		printf("ft_strcat test 2\n");
+		printf("ft_strcat test 1 _%s_, _%s_\n", ret, "1234");
 
-	// add 34
 	ret = ft_strcat(s1, s2);
 	if (memcmp(ret, "123434", strlen("123434")) != 0)
 		printf("bzero test 3\n");
 
 	// check the 0 at the end
-	char s11[size] = { 0, 0, 0, 'u' };
+	char s11[size] = { 'o', 0, 0, 0, 'u' };
 	char s22[size] = { 'a', 'b', 'c' };
 	ret = ft_strcat(s11, s22);
-	if (memcmp(ret, "abc", 4) != 0)
-		printf("ft_strcat test 4");
+	if (memcmp(ret, "oabc", 4) != 0)
+		printf("ft_strcat test 4\n");
 }
 
 void test_isalpha(void)
@@ -233,6 +233,10 @@ void test_puts(void)
 {
 	int ret;
 
+	int stdout;
+
+	stdout = dup(1);
+	// comment je fais pour que ce truc marche mieux?
 	ret = ft_puts("222222222222:123:12");
 	if (ret <= 0)
 		printf("puts test 1");
@@ -379,20 +383,35 @@ void test_ft_cat(void)
 
 int main(void)
 {
-	test_ft_bzero();
-	test_ft_strcat();
-	test_isalpha();
-	test_isdigit();
-	test_isascii();
-	test_isalnum();
-	test_isprint();
-	test_toupper();
-	test_tolower();
-	//	test_puts();
-	test_ft_strlen();
-	test_ft_memset();
-	test_ft_memcpy();
-	test_ft_strdup();
-	test_ft_cat();
+//	test_ft_bzero();
+//	test_ft_strcat();
+//	test_ft_strlen();
+//	test_isalpha();
+//	test_isdigit();
+//	test_isascii();
+//	test_isalnum();
+//	test_isprint();
+//	test_toupper();
+//	test_tolower();
+	test_puts();
+//	test_ft_memset();
+//	test_ft_memcpy();
+//	test_ft_strdup();
+//	test_ft_cat();
 	return 0;
+
+
+	//	b  0 1
+	//	8  0 1 2 3 4 5 6 7
+	//	   0 1 2 3 4 5 6 7 8 9
+	//	0x 0 1 2 3 4 5 6 7 8 9 a b c d e f
+	//	4
+	//
+	//	0x10 -> 16
+
+
+
+
+
+
 }

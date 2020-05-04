@@ -1,8 +1,7 @@
 
-%define loop_counter    rcx
-%define ptr_string      rdi
-%define start           r8
-%define new_char        al
+%define i        rcx
+%define start    r8
+%define new_char al
 
 section .text
     global _ft_memset
@@ -10,11 +9,11 @@ section .text
 
 _ft_memset:
     push rbp
-    mov  rbp,   rsp
+    mov  rbp, rsp
 
-    mov start, rdi
+    mov start,    rdi
     mov new_char, 'c'
-    mov loop_counter, rdx
+    mov i,        rdx
     cld                    ; clear direction flag
     rep	stosb              ; rep until rcx == 0
                            ; put [rdi] = al
@@ -22,4 +21,3 @@ _ft_memset:
 
     leave
     ret
-

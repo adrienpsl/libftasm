@@ -1,26 +1,24 @@
 %define i       r8
-%define string  rdi
+%define ptr     rdi
 %define size    rsi
 
 SECTION .text
     global _ft_bzero
 
-
 _ft_bzero:
-
-init:
     push rbp
-    mov  rbp,   rsp
+    mov  rbp, rsp
 
-    mov  i,    0
+set:
+    mov  i, 0
 
-set_bit_0:
+loop:
     cmp i, size
     je  end
-    mov byte [string], 0
+    mov byte [ptr] , 0
     inc i
-    inc string
-    jmp set_bit_0
+    inc ptr
+    jmp loop
 
 end:
     leave

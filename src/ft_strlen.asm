@@ -1,5 +1,5 @@
 
-
+; http://www.int80h.org/strlen/
 
 section .text
     global _ft_strlen

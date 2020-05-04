@@ -1,38 +1,59 @@
 
-%define s1      rdi
-%define s2      rsi
-%define start   r8
-%define tmp     r9b
+%define s1        [ rbp - 0x8*1 ]      ;
+%define s1_length [ rbp - 0x8*2 ]
+%define s2        [ rbp - 0x8*3 ]     ;
+%define s2_length [ rbp - 0x8*4 ]     ;
+%define start     [ rbp - 0x8*5 ]
+
+%macro set_arg 3
+    mov rdi, %1
+    mov rsi, %2
+    mov rdx, %3
+%endmacro
+
+[BITS 64]
 
 SECTION .text
     global _ft_strcat
-
+    extern _ft_strlen
+    extern _ft_memcpy
 
 _ft_strcat:
-
-init:
     push rbp
     mov  rbp,   rsp
 
-    mov  start,    s1;
+    sub  rsp, 0x8 * 6
 
-get_end_s1:
-    cmp byte [s1], 0x0
-    je copy_into
-    inc s1
-    jmp get_end_s1
+save_ptr:
+    mov start, rdi                 ; save for return start str
+    mov s1,    rdi
+    mov s2,    rsi
 
-copy_into:
-    cmp byte[s2], 0x0
-    jz end
-    mov tmp, [s2]
-    mov byte [s1], tmp
-    inc s1
-    inc s2
-    jmp copy_into
+get_both_size:
+    set_arg s1,        0,  0
+    call    _ft_strlen
+    mov     s1_length, rax         ; add his length to s1
 
-end:
-    mov byte[s1], 0
+    set_arg s2,        0,  0
+    call    _ft_strlen
+    mov     s2_length, rax         ; add his length to s1
+
+move_end_s1:
+    mov r9, s1                     ; compute all s1 size
+    add r9, s1_length
+    mov s1, r9
+
+copy:
+    set_arg s1, s2, s2_length      ; copy value
+    call _ft_memcpy
+
+add_terminating_0:
+    mov r9, start
+    add r9, s2_length
+    add r9, s1_length
+    mov byte [r9], 0
+
     mov rax, start
+
     leave
     ret

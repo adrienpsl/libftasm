@@ -3,9 +3,9 @@
 %define MACH_SYSCALL(nb) 0x02000000 | nb
 
 ; my stack values
-%define size [rbp - 0x8]
-%define origin [rbp - 0x8*2]
-%define memory [rbp - 0x8*3]
+%define size    [rbp - 0x8]
+%define origin  [rbp - 0x8*2]
+%define memory  [rbp - 0x8*3]
 
 [BITS 64]
 

@@ -1,62 +1,63 @@
 %define MACH_SYSCALL(nb) 0x02000000 | nb
 %define STDOUT 1
 %define WRITE 4
+%define i r8
+%define ptr rdi
 
-%macro start 0
-    push rbp
-    mov  rbp,   rsp
-%endmacro
+%define size_arg
 
 %macro call_write 1
-    lea rsi, %1
-    mov rdi, STDOUT
-    mov rdx, r8
     mov rax, MACH_SYSCALL(WRITE)
+    mov rdi, STDOUT                          ; fd
+    lea rsi, %1                              ; str
+    mov rdx, i                               ; str size
     syscall
 
-    cmp rax, -1                     ; if function fuckup
+    cmp rax, -1                              ; read fails
     je handle_write_error
 
-    mov rax, 10                     ; set ok return
+    mov rax, 10                              ; return > 0 if no fail
 %endmacro
 
 section .text
     global _ft_puts
 
 _ft_puts:
-    start
-    cmp rdi, 0
-    je input_null
+    push rbp
+    mov  rbp, rsp
 
+    cmp rdi, 0                               ; input == NULL
+    je  input_null
 
-    mov r8, 0
+    mov i, 0                                 ; letter counter
+
 get_size:
-    cmp byte [rdi + r8], 0
-    je write
-    inc r8
+    cmp byte     [ptr + i], 0
+    je  write
+    inc i
     jmp get_size
 
 write:
-    call_write [rdi]
-    mov r8, 1
+    call_write [ptr]
     call_write [rel space]
     jmp out
 
-handle_write_error:
-    mov rax, -1
 
 input_null:
-    mov r8, null.len
-    call_write[rel null.string]
-    mov rax, 10
+    mov        i,  null_str.len
+    call_write [rel null_str.string]
+    mov        rax, 10
+
+handle_write_error:
+    mov rax, -1
 
 out:
     leave
     ret
 
 section .data
-space: db 10
+    space: db 10
 
-null:
+null_str:
     .string db "(null)", 10
-    .len equ $ - null.string
+    .len equ $ - null_str.string

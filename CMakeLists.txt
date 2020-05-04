@@ -19,4 +19,4 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(libftasm
 #        main.c
         src/test.c
-        src/ft_cat.c)
+        resources/ft_cat.c)

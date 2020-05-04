@@ -67,6 +67,32 @@ The register:
 
 
 
+
+
+c'est lundi, relou, ta journee a mal commencer,
+mais soudain, tu vois sur un 4x3 une plage vetu grain blanc,
+et sa couvre ton visage du souvenir de nos derniere vacances,
+alors tu souris, et tu te rappelle que ce soir je serai la pour
+toi, que nous auront une de ses conversations qui ne s'epuise jamais,
+contempler le monde ensemble, quelque soit l'endroit... 
+ca, c'est le but, si tu swap a droite, dans un bar, ca commencera par
+fun, drole, la nuit sera douce, et animal. la suite est au debut. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 useful website: 
 - use with clion https://stackoverflow.com/questions/49131996/compile-asm-and-c-with-asm-for-debugging
 - 

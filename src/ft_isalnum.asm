@@ -8,16 +8,13 @@ SECTION .text
 
 
 _ft_isalnum:
-
-init:
     push rbp
     mov  rbp,   rsp
 
-do_test:
+test:
     call _ft_isalpha
-    cmp rax, 1  ; if is alpha, say ok
-    je out
-
+    cmp  rax, 1  ; if is alpha, say ok
+    je   out
     call _ft_isdigit
 
 out:
