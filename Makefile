@@ -20,8 +20,7 @@ SRCS = 	ft_bzero.asm \
 		ft_tolower.asm \
 		ft_toupper.asm \
 		ft_strcat.asm \
-		test.asm
-#		ft_cat.asm \
+		ft_cat.asm
 
 OBJS = $(addprefix $(OBJSDIR),$(SRCS:.asm=.o))
 
@@ -36,7 +35,7 @@ $(NAME): $(OBJS)
 	ranlib $(NAME)
 
 test: $(NAME)
-	gcc -o $(T_NAME) src/main.c  -I includes/ -L./ -lfts
+	gcc -o $(T_NAME) src/test.c  -I includes/ -L./ -lfts
 	./$(T_NAME)
 
 clean:

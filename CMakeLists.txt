@@ -17,6 +17,6 @@ set(CMAKE_CXX_STANDARD 11)
 #        src/ft_strlen.s)
 #
 add_executable(libftasm
-        main.c
-#        src/test.c
+#        main.c
+        src/test.c
         src/ft_cat.c)

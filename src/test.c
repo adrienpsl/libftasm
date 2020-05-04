@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <fcntl.h>
 #include "strings.h"
 # include "stdlib.h"
 
@@ -333,9 +334,24 @@ void test_ft_strdup(void)
 		if (0 != memcmp(test, result, 1))
 			printf("error ft_strdup 2\n");
 	}
+}
+int ft_cat( int fd);
+
+void test_ft_cat(void)
+{
+	int fd = open(__FILE__, O_RDONLY);
+
+	int ret = ft_cat(fd);
+	printf("%d \n", ret);
+
+	ret = ft_cat(-1);
+	printf("%d \n", ret);
+
+	ret = ft_cat(0);
+	printf("%d \n", ret);
+
 
 }
-
 
 int main(void)
 {
@@ -353,5 +369,6 @@ int main(void)
 	test_ft_memset();
 	test_ft_memcpy();
 	test_ft_strdup();
+	test_ft_cat();
 	return 0;
 }
