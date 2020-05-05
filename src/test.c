@@ -383,7 +383,7 @@ void test_ft_cat(void)
 
 int main(void)
 {
-//	test_ft_bzero();
+	test_ft_bzero();
 //	test_ft_strcat();
 //	test_ft_strlen();
 //	test_isalpha();
